@@ -36,9 +36,11 @@
             button1 = new Button();
             label3 = new Label();
             GetRoomListButton = new Button();
-            listBox1 = new ListBox();
+            RoomList = new ListBox();
             label4 = new Label();
-            textBox1 = new TextBox();
+            LogTextBox = new TextBox();
+            JoinButton = new Button();
+            CreateRoomButton = new Button();
             SuspendLayout();
             // 
             // label1
@@ -86,6 +88,7 @@
             button1.TabIndex = 4;
             button1.Text = "연결";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // label3
             // 
@@ -106,16 +109,17 @@
             GetRoomListButton.TabIndex = 6;
             GetRoomListButton.Text = "새로고침";
             GetRoomListButton.UseVisualStyleBackColor = true;
+            GetRoomListButton.Click += GetRoomListButton_Click;
             // 
-            // listBox1
+            // RoomList
             // 
-            listBox1.Font = new Font("맑은 고딕", 14F, FontStyle.Regular, GraphicsUnit.Point, 129);
-            listBox1.FormattingEnabled = true;
-            listBox1.ItemHeight = 38;
-            listBox1.Location = new Point(47, 173);
-            listBox1.Name = "listBox1";
-            listBox1.Size = new Size(365, 270);
-            listBox1.TabIndex = 7;
+            RoomList.Font = new Font("맑은 고딕", 14F, FontStyle.Regular, GraphicsUnit.Point, 129);
+            RoomList.FormattingEnabled = true;
+            RoomList.ItemHeight = 38;
+            RoomList.Location = new Point(47, 173);
+            RoomList.Name = "RoomList";
+            RoomList.Size = new Size(365, 270);
+            RoomList.TabIndex = 7;
             // 
             // label4
             // 
@@ -127,24 +131,47 @@
             label4.TabIndex = 8;
             label4.Text = "System Log";
             // 
-            // textBox1
+            // LogTextBox
             // 
-            textBox1.Font = new Font("맑은 고딕", 14F, FontStyle.Regular, GraphicsUnit.Point, 129);
-            textBox1.Location = new Point(434, 173);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.ReadOnly = true;
-            textBox1.Size = new Size(414, 270);
-            textBox1.TabIndex = 9;
+            LogTextBox.Font = new Font("맑은 고딕", 12F, FontStyle.Regular, GraphicsUnit.Point, 129);
+            LogTextBox.Location = new Point(440, 173);
+            LogTextBox.Multiline = true;
+            LogTextBox.Name = "LogTextBox";
+            LogTextBox.ReadOnly = true;
+            LogTextBox.Size = new Size(408, 270);
+            LogTextBox.TabIndex = 9;
+            // 
+            // JoinButton
+            // 
+            JoinButton.Font = new Font("맑은 고딕", 14F, FontStyle.Regular, GraphicsUnit.Point, 129);
+            JoinButton.Location = new Point(47, 474);
+            JoinButton.Name = "JoinButton";
+            JoinButton.Size = new Size(365, 49);
+            JoinButton.TabIndex = 10;
+            JoinButton.Text = "입장";
+            JoinButton.UseVisualStyleBackColor = true;
+            // 
+            // CreateRoomButton
+            // 
+            CreateRoomButton.Font = new Font("맑은 고딕", 14F, FontStyle.Regular, GraphicsUnit.Point, 129);
+            CreateRoomButton.Location = new Point(440, 474);
+            CreateRoomButton.Name = "CreateRoomButton";
+            CreateRoomButton.Size = new Size(408, 49);
+            CreateRoomButton.TabIndex = 11;
+            CreateRoomButton.Text = "방만들기";
+            CreateRoomButton.UseVisualStyleBackColor = true;
+            CreateRoomButton.Click += CreateRoomButton_Click;
             // 
             // LobbyForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(869, 548);
-            Controls.Add(textBox1);
+            ClientSize = new Size(886, 548);
+            Controls.Add(CreateRoomButton);
+            Controls.Add(JoinButton);
+            Controls.Add(LogTextBox);
             Controls.Add(label4);
-            Controls.Add(listBox1);
+            Controls.Add(RoomList);
             Controls.Add(GetRoomListButton);
             Controls.Add(label3);
             Controls.Add(button1);
@@ -168,8 +195,10 @@
         private Button button1;
         private Label label3;
         private Button GetRoomListButton;
-        private ListBox listBox1;
+        private ListBox RoomList;
         private Label label4;
-        private TextBox textBox1;
+        private TextBox LogTextBox;
+        private Button JoinButton;
+        private Button CreateRoomButton;
     }
 }
