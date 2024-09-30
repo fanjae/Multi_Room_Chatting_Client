@@ -30,7 +30,7 @@
         {
             label1 = new Label();
             roomNameTextBox = new TextBox();
-            button1 = new Button();
+            CreateRoomButton = new Button();
             SuspendLayout();
             // 
             // label1
@@ -51,23 +51,23 @@
             roomNameTextBox.Size = new Size(450, 45);
             roomNameTextBox.TabIndex = 1;
             // 
-            // button1
+            // CreateRoomButton
             // 
-            button1.Font = new Font("맑은 고딕", 14F, FontStyle.Regular, GraphicsUnit.Point, 129);
-            button1.Location = new Point(642, 17);
-            button1.Name = "button1";
-            button1.Size = new Size(146, 56);
-            button1.TabIndex = 2;
-            button1.Text = "생성";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            CreateRoomButton.Font = new Font("맑은 고딕", 14F, FontStyle.Regular, GraphicsUnit.Point, 129);
+            CreateRoomButton.Location = new Point(642, 17);
+            CreateRoomButton.Name = "CreateRoomButton";
+            CreateRoomButton.Size = new Size(146, 56);
+            CreateRoomButton.TabIndex = 2;
+            CreateRoomButton.Text = "생성";
+            CreateRoomButton.UseVisualStyleBackColor = true;
+            CreateRoomButton.Click += CreateRoomButton_Click;
             // 
             // CreateRoom
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 98);
-            Controls.Add(button1);
+            Controls.Add(CreateRoomButton);
             Controls.Add(roomNameTextBox);
             Controls.Add(label1);
             Name = "CreateRoom";
@@ -80,6 +80,6 @@
 
         private Label label1;
         private TextBox roomNameTextBox;
-        private Button button1;
+        private Button CreateRoomButton;
     }
 }

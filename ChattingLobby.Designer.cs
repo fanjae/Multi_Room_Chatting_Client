@@ -33,7 +33,7 @@
             IPTextBox = new TextBox();
             PortTextBox = new TextBox();
             label2 = new Label();
-            button1 = new Button();
+            ConnectButton = new Button();
             label3 = new Label();
             GetRoomListButton = new Button();
             RoomList = new ListBox();
@@ -79,16 +79,16 @@
             label2.TabIndex = 2;
             label2.Text = "Port";
             // 
-            // button1
+            // ConnectButton
             // 
-            button1.Font = new Font("맑은 고딕", 14F, FontStyle.Regular, GraphicsUnit.Point, 129);
-            button1.Location = new Point(626, 16);
-            button1.Name = "button1";
-            button1.Size = new Size(213, 49);
-            button1.TabIndex = 4;
-            button1.Text = "연결";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            ConnectButton.Font = new Font("맑은 고딕", 14F, FontStyle.Regular, GraphicsUnit.Point, 129);
+            ConnectButton.Location = new Point(626, 16);
+            ConnectButton.Name = "ConnectButton";
+            ConnectButton.Size = new Size(213, 49);
+            ConnectButton.TabIndex = 4;
+            ConnectButton.Text = "연결";
+            ConnectButton.UseVisualStyleBackColor = true;
+            ConnectButton.Click += ConnectButton_Click;
             // 
             // label3
             // 
@@ -150,6 +150,7 @@
             JoinButton.TabIndex = 10;
             JoinButton.Text = "입장";
             JoinButton.UseVisualStyleBackColor = true;
+            JoinButton.Click += JoinButton_Click;
             // 
             // CreateRoomButton
             // 
@@ -174,7 +175,7 @@
             Controls.Add(RoomList);
             Controls.Add(GetRoomListButton);
             Controls.Add(label3);
-            Controls.Add(button1);
+            Controls.Add(ConnectButton);
             Controls.Add(PortTextBox);
             Controls.Add(label2);
             Controls.Add(IPTextBox);
@@ -192,7 +193,7 @@
         private TextBox IPTextBox;
         private TextBox PortTextBox;
         private Label label2;
-        private Button button1;
+        private Button ConnectButton;
         private Label label3;
         private Button GetRoomListButton;
         private ListBox RoomList;

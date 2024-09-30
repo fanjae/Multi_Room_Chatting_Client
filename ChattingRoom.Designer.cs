@@ -1,6 +1,6 @@
 ﻿namespace Multi_Room_Chatting_Client
 {
-    partial class ChattingRoom
+    partial class ChattingRoom_Form
     {
         /// <summary>
         /// Required designer variable.
@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             chattingRoomTextBox = new TextBox();
-            textBox1 = new TextBox();
+            sendTextBox = new TextBox();
             SendButton = new Button();
-            button1 = new Button();
+            ExitButton = new Button();
             SuspendLayout();
             // 
             // chattingRoomTextBox
@@ -44,13 +44,14 @@
             chattingRoomTextBox.Size = new Size(883, 420);
             chattingRoomTextBox.TabIndex = 0;
             // 
-            // textBox1
+            // sendTextBox
             // 
-            textBox1.Font = new Font("맑은 고딕", 14F, FontStyle.Regular, GraphicsUnit.Point, 129);
-            textBox1.Location = new Point(26, 472);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(577, 45);
-            textBox1.TabIndex = 1;
+            sendTextBox.Font = new Font("맑은 고딕", 14F, FontStyle.Regular, GraphicsUnit.Point, 129);
+            sendTextBox.Location = new Point(26, 472);
+            sendTextBox.Name = "sendTextBox";
+            sendTextBox.Size = new Size(577, 45);
+            sendTextBox.TabIndex = 1;
+            sendTextBox.KeyDown += sendTextBox_KeyDown;
             // 
             // SendButton
             // 
@@ -61,28 +62,31 @@
             SendButton.TabIndex = 2;
             SendButton.Text = "보내기";
             SendButton.UseVisualStyleBackColor = true;
+            SendButton.Click += SendButton_Click;
             // 
-            // button1
+            // ExitButton
             // 
-            button1.Font = new Font("맑은 고딕", 14F, FontStyle.Regular, GraphicsUnit.Point, 129);
-            button1.Location = new Point(769, 472);
-            button1.Name = "button1";
-            button1.Size = new Size(143, 45);
-            button1.TabIndex = 3;
-            button1.Text = "나가기";
-            button1.UseVisualStyleBackColor = true;
+            ExitButton.Font = new Font("맑은 고딕", 14F, FontStyle.Regular, GraphicsUnit.Point, 129);
+            ExitButton.Location = new Point(769, 472);
+            ExitButton.Name = "ExitButton";
+            ExitButton.Size = new Size(143, 45);
+            ExitButton.TabIndex = 3;
+            ExitButton.Text = "나가기";
+            ExitButton.UseVisualStyleBackColor = true;
+            ExitButton.Click += ExitButton_Click;
             // 
-            // ChattingRoom
+            // ChattingRoom_Form
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1258, 547);
-            Controls.Add(button1);
+            ClientSize = new Size(936, 547);
+            Controls.Add(ExitButton);
             Controls.Add(SendButton);
-            Controls.Add(textBox1);
+            Controls.Add(sendTextBox);
             Controls.Add(chattingRoomTextBox);
-            Name = "ChattingRoom";
+            Name = "ChattingRoom_Form";
             Text = "ChattingRoom";
+            FormClosing += ChattingRoom_FormClosing;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -90,8 +94,8 @@
         #endregion
 
         private TextBox chattingRoomTextBox;
-        private TextBox textBox1;
+        private TextBox sendTextBox;
         private Button SendButton;
-        private Button button1;
+        private Button ExitButton;
     }
 }

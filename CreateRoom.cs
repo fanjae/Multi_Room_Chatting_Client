@@ -24,11 +24,11 @@ namespace Multi_Room_Chatting_Client
         }
 
 
-        private void button1_Click(object sender, EventArgs e)
+        private void CreateRoomButton_Click(object sender, EventArgs e)
         {
             if (roomNameTextBox.Text == "")
             {
-                MessageBox.Show("IP 주소는 필수 입력 값입니다.", "연결 오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("방 주소는 필수 입력 값입니다.", "방 생성 오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {

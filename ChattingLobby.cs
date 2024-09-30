@@ -10,6 +10,7 @@ namespace Multi_Room_Chatting_Client
         public LobbyForm()
         {
             InitializeComponent();
+            this.FormClosing += new FormClosingEventHandler(LobbyForm_FormClosing);
         }
         private bool IsSocketConnected(Socket socket)
         {
@@ -32,7 +33,7 @@ namespace Multi_Room_Chatting_Client
                 return false;
             }
         }
-        private void button1_Click(object sender, EventArgs e)
+        private void ConnectButton_Click(object sender, EventArgs e)
         {
             if (IPTextBox.Text == "")
             {
@@ -80,7 +81,7 @@ namespace Multi_Room_Chatting_Client
                 }
                 else
                 {
-                    string[] roomList = rooms.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                    string[] roomList = rooms.Split('\n', StringSplitOptions.RemoveEmptyEntries);
                     RoomList.Items.Clear();
                     RoomList.Items.AddRange(roomList);
                 }
@@ -105,19 +106,66 @@ namespace Multi_Room_Chatting_Client
                     int recvLength = socket.Receive(recvBuffer);
                     string rooms = Encoding.UTF8.GetString(recvBuffer, 0, recvLength);
 
-                    if (rooms == "/Exist Room")
+                    if (rooms == "/Exist_Room")
                     {
-                        MessageBox.Show("이미 존재하는 방입니다.", "방 생성 오류", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("이미 존재하는 방입니다.", "방 생성 오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     else
                     {
-                        request = "/Join_Chatting_Room " + Room.getRoomNameTextBox();
-                        buffer = Encoding.UTF8.GetBytes(request);
-                        socket.Send(buffer);
+                        MessageBox.Show("방 생성이 완료되었습니다.", "방 생성 성공", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LogTextBox.Text += "[Log] 방을 생성하였습니다. \r\n";
 
-
+                        request = "/Join_Chatting_Room " + rooms;
+                        JoinChattingRoom(request);
                     }
                 }
+            }
+        }
+
+        private void JoinButton_Click(object sender, EventArgs e)
+        {
+            if (RoomList.SelectedItem == null)
+            {
+                MessageBox.Show("선택된 방이 없습니다.", "방 입장 오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (IsSocketConnected(socket))
+            {
+                string request = "/Join_Chatting_Room " + RoomList.SelectedItem.ToString();
+                JoinChattingRoom(request);
+            }
+        }
+
+        private void JoinChattingRoom(string request)
+        {
+            byte[] buffer = Encoding.UTF8.GetBytes(request);
+            socket.Send(buffer);
+
+            byte[] recvBuffer = new byte[1024];
+            int recvLength = socket.Receive(recvBuffer);
+            string message = Encoding.UTF8.GetString(recvBuffer, 0, recvLength);
+
+            if (message == "/Not_Exist_Room")
+            {
+                MessageBox.Show("방이 존재하지 않습니다.", "방 입장 오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                ChattingRoom_Form room = new ChattingRoom_Form(socket, message);
+
+                room.ShowDialog();
+            }
+        }
+
+        private void LobbyForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (socket != null && socket.Connected == true)
+            {
+                string request = "/Close_Socket";
+                byte[] buffer = Encoding.UTF8.GetBytes(request);
+                socket.Send(buffer);
+
+                socket.Shutdown(SocketShutdown.Both);
+                socket.Close();
             }
         }
     }
