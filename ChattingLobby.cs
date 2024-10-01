@@ -66,7 +66,7 @@ namespace Multi_Room_Chatting_Client
         {
             if (IsSocketConnected(socket))
             {
-                string request = "/Get_Chatting_Room";
+                string request = Constants.GET_CHATTING_ROOM;
                 byte[] buffer = Encoding.UTF8.GetBytes(request);
                 socket.Send(buffer);
 
@@ -74,7 +74,7 @@ namespace Multi_Room_Chatting_Client
                 int recvLength = socket.Receive(recvBuffer);
                 string rooms = Encoding.UTF8.GetString(recvBuffer, 0, recvLength);
 
-                if (rooms == "/No_Room")
+                if (rooms == Constants.NO_ROOM)
                 {
                     MessageBox.Show("현재 생성된 방이 없습니다.", "방 리스트", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     RoomList.Items.Clear();  // ListBox 초기화
@@ -98,7 +98,7 @@ namespace Multi_Room_Chatting_Client
 
                 if (result == DialogResult.OK)
                 {
-                    string request = "/Create_Chatting_Room " + Room.getRoomNameTextBox();
+                    string request = Constants.CREATE_CHATTING_ROOM + Room.getRoomNameTextBox();
                     byte[] buffer = Encoding.UTF8.GetBytes(request);
                     socket.Send(buffer);
 
@@ -106,7 +106,7 @@ namespace Multi_Room_Chatting_Client
                     int recvLength = socket.Receive(recvBuffer);
                     string rooms = Encoding.UTF8.GetString(recvBuffer, 0, recvLength);
 
-                    if (rooms == "/Exist_Room")
+                    if (rooms == Constants.EXIST_ROOM)
                     {
                         MessageBox.Show("이미 존재하는 방입니다.", "방 생성 오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
@@ -115,7 +115,7 @@ namespace Multi_Room_Chatting_Client
                         MessageBox.Show("방 생성이 완료되었습니다.", "방 생성 성공", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         LogTextBox.Text += "[Log] 방을 생성하였습니다. \r\n";
 
-                        request = "/Join_Chatting_Room " + rooms;
+                        request = Constants.JOIN_CHATTING_ROOM + rooms;
                         JoinChattingRoom(request);
                     }
                 }
@@ -130,7 +130,7 @@ namespace Multi_Room_Chatting_Client
             }
             else if (IsSocketConnected(socket))
             {
-                string request = "/Join_Chatting_Room " + RoomList.SelectedItem.ToString();
+                string request = Constants.JOIN_CHATTING_ROOM + RoomList.SelectedItem.ToString();
                 JoinChattingRoom(request);
             }
         }
@@ -144,7 +144,7 @@ namespace Multi_Room_Chatting_Client
             int recvLength = socket.Receive(recvBuffer);
             string message = Encoding.UTF8.GetString(recvBuffer, 0, recvLength);
 
-            if (message == "/Not_Exist_Room")
+            if (message == Constants.NOT_EXIST_ROOM)
             {
                 MessageBox.Show("방이 존재하지 않습니다.", "방 입장 오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -160,7 +160,7 @@ namespace Multi_Room_Chatting_Client
         {
             if (socket != null && socket.Connected == true)
             {
-                string request = "/Close_Socket";
+                string request = Constants.CLOSE_SOCKET;
                 byte[] buffer = Encoding.UTF8.GetBytes(request);
                 socket.Send(buffer);
 
