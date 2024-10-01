@@ -142,7 +142,7 @@ namespace Multi_Room_Chatting_Client
         {
             if (IsSocketConnected(socket))
             {
-                string request = "/Exit_Room";
+                string request = Constants.EXIT_ROOM;
                 byte[] buffer = Encoding.UTF8.GetBytes(request);
                 socket.Send(buffer);
             }
